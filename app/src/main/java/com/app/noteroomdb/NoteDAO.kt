@@ -12,9 +12,18 @@ import com.app.noteroomdb.DB.UnitLocalized.NoteCurrentEntry
 @Dao
 interface NoteDAO {
     //update or insert at the same time
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert(Nentry:NoteEntry)
 
-    @Query("select * from notedb where id=$note_id")
-    fun getNote():LiveData<NoteCurrentEntry>
+    @Query("select * from note where id=$note_id")
+    fun getNote():LiveData<NoteCurrentEntry>*/
+
+    @Insert
+    fun insertData(note: List<NoteEntry>)
+
+    @Query("SELECT * FROM note")
+    fun getNote(): List<NoteEntry>
+
+    @Query("DELETE FROM note")
+    fun delNote(): List<NoteEntry>
 }
